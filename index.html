@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log Record</title>
+
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+  </head>
+  <body>
+    <script>
+      const liffinitial = () => {
+        liff
+          .init({
+            liffId: "1655725132-AZypWpBv", //LIFF ID
+          })
+          .then(() => {
+            fetchUserProfile();
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      };
+
+      const fetchUserProfile = () => {
+        liff
+        .getProfile()
+        .then((profile) => {
+          window.location.replace("https://www.google.com/"); //SSO Login Link
+          sessionStorage.setItem("display-name", profile.displayName);
+          sessionStorage.setItem("user-id", profile.userId);
+          sessionStorage.setItem("profile-picture", profile.pictureUrl);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      };
+
+      window.addEventListener("load", liffinitial);
+    </script>
+  </body>
+</html>
